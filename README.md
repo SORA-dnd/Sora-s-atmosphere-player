@@ -28,4 +28,8 @@ Switch between categories to browse different collections of files (images or vi
 
 Manage all active animations from the "Now Playing" list. You can drag and drop thumbnails to change their layering order on the canvas or remove a specific animation. If you double-click an animation in this list, it becomes selected. The next animation you play from the browser will then replace the selected one instead of being added as a new layer.
 
-![Uploading 播放列表 00_00_00-00_00_30.gif…]()
+
+![播放列表 00_00_00-00_00_30](https://github.com/user-attachments/assets/171bd1cc-a2f4-431c-9f4d-9649b7fc6aba)
+
+The animation materials shown in the video are from "The Kinemancer". You can visit it through this website: https://thekinemancer.gumroad.com/. The Kinemancer is an outstanding animation creator.
+
