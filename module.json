@@ -1,10 +1,10 @@
 {
   "id": "sequencer-webm-orb",
-  "title": "Sora的氛围播放器",
-  "description": "可拖动的小悬浮球，列出并全屏播放 .webm 文件，支持分类与收藏夹，一键清除 Sequencer 动画。",
-  "version": "1.0.0",
+  "title": "Sora-s-atmosphere-player",
+  "description": "An atmosphere animation player based on sequencer module,Based on fvtt v13",
+  "version": "1.0.3",
   "authors": [
-    { "name": "YourName" }
+    { "name": "Sora" }
   ],
   "compatibility": {
     "minimum": "13",
@@ -33,4 +33,5 @@
   "url": "",
   "manifest": "",
   "download": ""
+
 }
