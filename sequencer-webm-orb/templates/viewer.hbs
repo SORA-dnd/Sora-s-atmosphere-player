@@ -1,0 +1,67 @@
+<div class="webm-viewer">
+  <div class="toolbar">
+    <div class="left">
+      <button data-action="overview" class="tb-btn {{#if isOverview}}active{{/if}}">
+        <i class="fas fa-list"></i> overview
+      </button>
+
+      {{#each categories as |cat|}}
+        <span class="cat-wrap">
+          <button data-action="category" data-key="{{cat.key}}" class="tb-btn {{#if cat.isActive}}active{{/if}}">
+            <i class="fas fa-folder"></i> {{cat.name}}
+          </button>
+        </span>
+      {{/each}}
+
+      <button data-action="favorites" class="tb-btn"><i class="fas fa-star"></i> collect</button>
+      <button data-action="presets" class="tb-btn"><i class="fas fa-clone"></i> preinstall</button>
+    </div>
+
+    <div class="right">
+      <input type="text" name="search" placeholder="search..." value="{{searchQuery}}">
+      <button data-action="clear" class="tb-btn danger"><i class="fas fa-ban"></i> clear the animation</button>
+      <button data-action="toggle-order" class="tb-btn">
+        <i class="fas fa-layer-group"></i> {{orderLabel}}
+      </button>
+      <button data-action="add-file-current" class="tb-btn" title="Add files in file management" {{#unless canAddCurrent}}disabled{{/unless}}>
+        <i class="fas fa-plus"></i> Add files in file management
+      </button>
+    </div>
+  </div>
+
+  {{#if loading}}
+    <div class="loading"><i class="fas fa-spinner fa-spin"></i> longding...</div>
+  {{else}}
+    {{#if hasFiles}}
+      <div class="grid" data-virtual-grid></div>
+    {{else}}
+      <div class="empty">there are no files to display。</div>
+    {{/if}}
+  {{/if}}
+
+  <div class="now-playing">
+    <div class="np-header">
+      <span class="title"><i class="fas fa-music"></i> be playing</span>
+      <div class="actions">
+        <button class="tb-btn" data-action="np-clear-preset" {{#unless hasCurrentPreset}}disabled{{/unless}}>
+          <i class="fas fa-eraser"></i> clear the preset
+        </button>
+        <button class="tb-btn danger" data-action="np-clear-all">
+          <i class="fas fa-ban"></i> clear all
+        </button>
+      </div>
+    </div>
+    <div class="np-body">
+      <div class="np-group" data-group="preset">
+        <div class="np-title">current preset</div>
+        <ul class="np-list" id="np-list-preset"></ul>
+        <div class="np-empty" id="np-empty-preset">暂无</div>
+      </div>
+      <div class="np-group" data-group="single">
+        <div class="np-title">play alone</div>
+        <ul class="np-list" id="np-list-single"></ul>
+        <div class="np-empty" id="np-empty-single">暂无</div>
+      </div>
+    </div>
+  </div>
+</div>
