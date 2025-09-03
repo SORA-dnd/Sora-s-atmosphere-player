@@ -1,0 +1,85 @@
+/* 悬浮球 */
+#sequencer-webm-orb-orb, /* safeguard */
+#sequencer-webm-orb {
+  position: fixed; z-index: 9999; width: 54px; height: 54px; border-radius: 50%;
+  cursor: pointer; user-select: none; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.sequencer-webm-orb {
+  position: fixed; z-index: 9999; width: 54px; height: 54px; border-radius: 50%;
+  cursor: pointer; user-select: none; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  transition: opacity 150ms ease-out, transform 100ms ease-out;
+  opacity: 1;
+}
+.sequencer-webm-orb.dim { opacity: .5; }
+.sequencer-webm-orb.dragging { opacity: .9; }
+.sequencer-webm-orb .sequencer-webm-orb-core {
+  width: 100%; height: 100%; border-radius: 50%; position: relative;
+  background: radial-gradient(circle at 30% 30%, #8be9fd, #6272a4);
+  display: flex; align-items: center; justify-content: center;
+  animation: orbPulse 3s ease-in-out infinite;
+}
+.sequencer-webm-orb .sequencer-webm-orb-core .icon {
+  pointer-events: none; color: #fff; font-size: 22px; text-shadow: 0 2px 6px rgba(0,0,0,.6);
+}
+@keyframes orbPulse { 0% { transform: scale(1); } 50% { transform: scale(1.06); } 100% { transform: scale(1); } }
+
+/* 主界面 */
+.webm-viewer { display: flex; flex-direction: column; height: 100%; }
+.webm-viewer .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.webm-viewer .toolbar .left, .webm-viewer .toolbar .right { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.webm-viewer .tb-btn { padding: 4px 8px; border: 1px solid var(--color-border-dark-primary, #444); background: var(--color-bg, rgba(0,0,0,.2)); border-radius: 4px; }
+.webm-viewer .tb-btn.active { background: var(--color-border-highlight, #6c9); }
+.webm-viewer .tb-btn.danger { color: #fff; background: #b33; border-color: #b33; }
+.webm-viewer .tb-btn.slim { padding: 2px 6px; font-size: 12px; }
+.webm-viewer .cat-wrap { display: inline-flex; gap: 4px; align-items: center; }
+
+.webm-viewer input[name="search"] { width: 220px; }
+
+.webm-viewer .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; overflow: auto; }
+.webm-viewer .webm-item { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 8px; border: 1px solid var(--color-border-dark, #444); border-radius: 6px; background: rgba(0,0,0,.25); }
+.webm-viewer .webm-item .thumb { position: relative; height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.webm-viewer .webm-item .thumb video.preview { width: 100%; height: 100%; object-fit: cover; display: block; }
+.webm-viewer .webm-item .thumb .fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #bbb; transition: opacity .2s ease; }
+.webm-viewer .webm-item .thumb.playing .fallback { opacity: 0; }
+
+.webm-viewer .webm-item .name { font-size: 12px; word-break: break-all; }
+
+/* 右上角角标按钮统一样式 */
+.webm-viewer .webm-item .corner {
+  position: absolute; right: 6px; width: 22px; height: 22px; border: none;
+  background: rgba(0,0,0,.35); color: #eee; border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer;
+}
+.webm-viewer .webm-item .corner:hover { background: rgba(255,255,255,.12); }
+.webm-viewer .webm-item .corner.delete { top: 6px; color: #ff7676; }
+.webm-viewer .webm-item .corner.add-fav { top: 32px; color: #f7c948; }
+
+.webm-viewer .loading, .webm-viewer .empty { text-align: center; margin-top: 12px; color: #bbb; }
+
+/* 收藏夹 */
+.favorites-view { display: grid; grid-template-columns: 210px 1fr; gap: 10px; height: 100%; }
+.favorites-view .sidebar { border-right: 1px solid var(--color-border-dark, #444); padding-right: 10px; display: flex; flex-direction: column; }
+.favorites-view .actions { display: flex; gap: 6px; margin-bottom: 10px; }
+.favorites-view .actions .danger { color: #fff; background: #b33; border-color: #b33; }
+.favorites-view .fav-list { overflow: auto; display: flex; flex-direction: column; gap: 4px; }
+.favorites-view .fav-item { padding: 6px 8px; border-radius: 4px; cursor: pointer; }
+.favorites-view .fav-item.active { background: rgba(255,255,255,.08); }
+.favorites-view .content { overflow: hidden; display: flex; flex-direction: column; }
+.favorites-view .fav-header { padding-bottom: 8px; border-bottom: 1px solid var(--color-border-dark, #444); margin-bottom: 8px; }
+.favorites-view .grid { overflow: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.favorites-view .fav-file { position: relative; padding: 8px; border: 1px solid var(--color-border-dark, #444); border-radius: 6px; background: rgba(0,0,0,.25); }
+.favorites-view .fav-file .thumb { position: relative; height: 120px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.favorites-view .fav-file .thumb video.preview { width: 100%; height: 100%; object-fit: cover; display: block; }
+.favorites-view .fav-file .thumb .fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 42px; color: #bbb; transition: opacity .2s ease; }
+.favorites-view .fav-file .thumb.playing .fallback { opacity: 0; }
+.favorites-view .fav-file .name { font-size: 12px; word-break: break-all; }
+.favorites-view .fav-file .remove { position: absolute; right: 6px; top: 6px; border: none; background: transparent; color: #e57373; font-size: 16px; }
+
+/* 分类设置 */
+.webm-settings-form { padding: 10px; }
+.webm-settings-form .form-header { font-weight: bold; margin-bottom: 8px; }
+.webm-settings-form .cat-row { padding: 6px; border: 1px solid var(--color-border-dark, #444); border-radius: 6px; margin-bottom: 8px; }
+.webm-settings-form .row-title { font-weight: bold; margin-bottom: 6px; }
+.webm-settings-form .row-fields { display: grid; grid-template-columns: auto 1fr auto auto 1fr auto auto; gap: 6px; align-items: center; }
+.webm-settings-form .form-footer { display: flex; justify-content: flex-end; margin-top: 10px; }

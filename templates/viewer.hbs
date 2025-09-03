@@ -1,0 +1,46 @@
+<div class="webm-viewer">
+  <div class="toolbar">
+    <div class="left">
+      <button data-action="overview" class="tb-btn {{#if isOverview}}active{{/if}}"><i class="fas fa-list"></i> 总览</button>
+      {{#each categories as |cat|}}
+        <span class="cat-wrap">
+          <button data-action="category" data-key="{{cat.key}}" class="tb-btn {{#if cat.isActive}}active{{/if}}">
+            <i class="fas fa-folder"></i> {{cat.name}}
+          </button>
+          <button data-action="add-file" data-key="{{cat.key}}" class="tb-btn slim" title="添加文件到此分类">
+            <i class="fas fa-plus"></i>
+          </button>
+        </span>
+      {{/each}}
+      <button data-action="favorites" class="tb-btn"><i class="fas fa-star"></i> 收藏</button>
+    </div>
+    <div class="right">
+      <input type="text" name="search" placeholder="搜索文件名..." value="{{searchQuery}}">
+      <button data-action="clear" class="tb-btn danger"><i class="fas fa-ban"></i> 清除动画</button>
+    </div>
+  </div>
+
+  {{#if loading}}
+    <div class="loading"><i class="fas fa-spinner fa-spin"></i> 正在索引文件...</div>
+  {{else}}
+    {{#if hasFiles}}
+      <div class="grid">
+        {{#each files as |f|}}
+        <div class="webm-item" data-path="{{f.path}}" data-source="{{f.source}}" data-cat-key="{{f.categoryKey}}" title="{{f.path}}">
+          <div class="thumb">
+            <video class="preview" muted loop preload="metadata" playsinline></video>
+            <i class="fas fa-film fallback"></i>
+          </div>
+          <div class="name">{{f.name}}</div>
+          <!-- 右上角：删除角标（双击生效） -->
+          <button class="corner delete" title="双击从播放器移除"><i class="fas fa-ban"></i></button>
+          <!-- 右上角：收藏（与删除角标并排） -->
+          <button class="corner add-fav" title="添加到收藏夹"><i class="fas fa-star"></i></button>
+        </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="empty">没有可显示的文件。请检查分类文件夹或切换分类。</div>
+    {{/if}}
+  {{/if}}
+</div>
