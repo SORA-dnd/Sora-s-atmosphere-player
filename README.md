@@ -31,5 +31,5 @@ Manage all active animations from the "Now Playing" list. You can drag and drop 
 
 ![播放列表 00_00_00-00_00_30](https://github.com/user-attachments/assets/171bd1cc-a2f4-431c-9f4d-9649b7fc6aba)
 
-The animation materials shown in the video are from "The Kinemancer". You can visit it through this website: https://thekinemancer.gumroad.com/. The Kinemancer is an outstanding animation creator.
+The animation materials shown in the video are from "The Kinemancer". You can visit it through this website: https://thekinemancer.com/. The Kinemancer is an outstanding animation creator.
 
