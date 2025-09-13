@@ -11,7 +11,8 @@ You can open the configuration interface by double-clicking the floating ball.
 
 
 
-Category Management: Use the "Category Settings" feature to customize the name and associated folder path for each of your categories. Each category can browse all files within a specified folder (up to 30 categories). You can browse by clicking on a category or find specific files using the search function![分类设置 00_00_00-00_00_30](https://github.com/user-attachments/assets/fb549c89-60e6-40bb-b187-10e6c29b7dc7)
+Category Management: Use the "Category Settings" feature to customize the name and associated folder path for each of your categories. Each category can browse all files within a specified folder (up to 30 categories). You can browse by clicking on a category or find specific files using the search function!
+[分类设置 00_00_00-00_00_30](https://github.com/user-attachments/assets/fb549c89-60e6-40bb-b187-10e6c29b7dc7)
 
 
 
