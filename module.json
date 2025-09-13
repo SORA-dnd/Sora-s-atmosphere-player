@@ -2,7 +2,7 @@
   "id": "sequencer-webm-orb",
   "title": "Sora-s-atmosphere-player",
   "description": "An atmosphere animation player based on sequencer module,Based on fvtt v13",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "authors": [
     { "name": "Sora" }
   ],
@@ -33,6 +33,4 @@
   "url": "",
   "manifest": "https://github.com/SORA-dnd/Sora-s-atmosphere-player/releases/download/v1.0.0/module.json",
   "download": "https://github.com/SORA-dnd/Sora-s-atmosphere-player/releases/download/v1.0.0/sequencer-webm-orb.zip"
-
 }
-
