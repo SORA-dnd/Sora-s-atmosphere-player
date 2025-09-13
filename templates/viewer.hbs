@@ -1,46 +1,73 @@
-<div class="webm-viewer">
+<div class="webm-viewer-reforged">
   <div class="toolbar">
-    <div class="left">
-      <button data-action="overview" class="tb-btn {{#if isOverview}}active{{/if}}"><i class="fas fa-list"></i> 总览</button>
-      {{#each categories as |cat|}}
-        <span class="cat-wrap">
-          <button data-action="category" data-key="{{cat.key}}" class="tb-btn {{#if cat.isActive}}active{{/if}}">
-            <i class="fas fa-folder"></i> {{cat.name}}
-          </button>
-          <button data-action="add-file" data-key="{{cat.key}}" class="tb-btn slim" title="添加文件到此分类">
-            <i class="fas fa-plus"></i>
-          </button>
-        </span>
-      {{/each}}
-      <button data-action="favorites" class="tb-btn"><i class="fas fa-star"></i> 收藏</button>
+    <!-- Primary Navigation -->
+    <div class="toolbar-group nav-group">
+      <button data-action="overview" class="{{#if isOverview}}active{{/if}}"><i class="fas fa-home"></i> Overview</button>
+      <div class="dropdown category-dropdown">
+        <button class="dropdown-toggle {{#if activeCategoryKey}}active{{/if}}" data-action="toggle-category-dropdown">
+          <i class="fas fa-folder"></i>
+          <span>{{activeCategoryName}}</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          {{#each categories as |cat|}}
+            <a class="dropdown-item" data-action="category" data-key="{{cat.key}}">{{cat.name}}</a>
+          {{/each}}
+        </div>
+      </div>
     </div>
-    <div class="right">
-      <input type="text" name="search" placeholder="搜索文件名..." value="{{searchQuery}}">
-      <button data-action="clear" class="tb-btn danger"><i class="fas fa-ban"></i> 清除动画</button>
+
+    <!-- Spacer -->
+    <div class="toolbar-spacer"></div>
+
+    <!-- Secondary Navigation & Tools -->
+    <div class="toolbar-group nav-group">
+        <button data-action="favorites" class="{{#if isFavorites}}active{{/if}}"><i class="fas fa-star"></i> Favorites</button>
+        <button data-action="presets" class="{{#if isPresets}}active{{/if}}"><i class="fas fa-clone"></i> Presets</button>
+    </div>
+    <div class="toolbar-group tools-group">
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" name="search" placeholder="Search..." value="{{searchQuery}}">
+      </div>
+      <button data-action="filter-media">
+        <i class="fas {{#if (eq mediaFilterMode 'img')}}fa-image{{else if (eq mediaFilterMode 'vid')}}fa-film{{else}}fa-filter{{/if}}"></i>
+        <span>{{filterLabel}}</span>
+      </button>
+      <button data-action="add-file-current" title="Add to Current Category" {{#unless canAddCurrent}}disabled{{/unless}}>
+        <i class="fas fa-plus"></i>
+      </button>
+      <button data-action="open-cat-config" title="Category Settings"><i class="fas fa-cog"></i></button>
+      <button data-action="clear" class="danger" title="Clear All Effects"><i class="fas fa-ban"></i></button>
     </div>
   </div>
 
-  {{#if loading}}
-    <div class="loading"><i class="fas fa-spinner fa-spin"></i> 正在索引文件...</div>
-  {{else}}
-    {{#if hasFiles}}
-      <div class="grid">
-        {{#each files as |f|}}
-        <div class="webm-item" data-path="{{f.path}}" data-source="{{f.source}}" data-cat-key="{{f.categoryKey}}" title="{{f.path}}">
-          <div class="thumb">
-            <video class="preview" muted loop preload="metadata" playsinline></video>
-            <i class="fas fa-film fallback"></i>
+  <div id="sequencer-webm-orb-host">
+      <!-- Collapsible Now Playing Panel -->
+      <div class="now-playing-container {{#if isNowPlayingExpanded}}expanded{{/if}}">
+          <div class="np-header" data-action="toggle-now-playing">
+              <div class="np-title">
+                  <i class="fas fa-play-circle"></i> Now Playing
+                  <span class="count">{{activeEffectsCount}}</span>
+              </div>
+              <div class="np-toggle-icon">
+                  <i class="fas fa-chevron-down"></i>
+              </div>
           </div>
-          <div class="name">{{f.name}}</div>
-          <!-- 右上角：删除角标（双击生效） -->
-          <button class="corner delete" title="双击从播放器移除"><i class="fas fa-ban"></i></button>
-          <!-- 右上角：收藏（与删除角标并排） -->
-          <button class="corner add-fav" title="添加到收藏夹"><i class="fas fa-star"></i></button>
-        </div>
-        {{/each}}
+          <div class="np-body">
+              {{!-- Content injected by renderNowPlayingGrid --}}
+          </div>
       </div>
-    {{else}}
-      <div class="empty">没有可显示的文件。请检查分类文件夹或切换分类。</div>
-    {{/if}}
-  {{/if}}
+      
+      <!-- Main Content Area -->
+      <div class="main-panel-scroller">
+          {{#if loading}}
+              <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+          {{else}}
+              <div class="grid"></div>
+              <div id="orb-fav-panel" style="display:none;"></div>
+              <div id="orb-pre-panel" style="display:none;"></div>
+          {{/if}}
+      </div>
+  </div>
 </div>
