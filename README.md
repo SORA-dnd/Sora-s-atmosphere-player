@@ -1,3 +1,8 @@
+V2.0.0 Major Update!
+This version introduces a complete user interface overhaul and a fundamental change to the playback logic.
+UI Remastered: The entire user interface has been rebuilt from the ground up for a more modern and intuitive workflow.
+Scene-Based Playback: Animations are no longer scaled to the GM's personal screen size. Instead, they are now scaled to perfectly cover the scene's dimensions. This ensures a consistent and immersive visual experience for all players, regardless of their individual screen sizes or resolutions.
+
 # Sora-s-atmosphere-player
 An atmosphere animation player based on sequencer module,Based on fvtt v13
 
